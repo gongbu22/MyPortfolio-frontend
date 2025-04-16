@@ -1,12 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const projects = [
-  { title: "Project 1", description: "설명입니다.", imageUrl: "https://via.placeholder.com/150", id: 1 },
-  { title: "Project 2", description: "설명입니다.", imageUrl: "https://via.placeholder.com/150", id: 2 },
-  { title: "Project 3", description: "설명입니다.", imageUrl: "https://via.placeholder.com/150", id: 3 },
-  { title: "Project 4", description: "설명입니다.", imageUrl: "https://via.placeholder.com/150", id: 4 },
-];
+function ProjectList() {
+  const [projects, setProjects] = useState([]);
+
+  const fetchProjects = async () => {
+    const res = await fetch('http://localhost:8000/projects');
+    const data = await res.json();
+    console.log(data);
+    setProjects(data);
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  return (
+    <section id="projects" className="mt-12 max-w-4xl w-full">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">Projects</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {projects.map((project) => (
+          <Link key={project.id} to={`/detail/${project.id}`} className="bg-white rounded-lg shadow-md p-4 transform transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
+            {/* 이미지 */}
+            <img
+              src={project.imageUrl || "https://via.placeholder.com/150"} // 이미지 URL이 없으면 placeholder 사용
+              alt={project.name}
+              className="w-full h-40 object-cover rounded-lg mb-4"
+            />
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">{project.name}</h3>
+            <p className="text-gray-500">{project.description}</p>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 const Home = () => {
   return (
@@ -26,24 +54,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="mt-12 max-w-4xl w-full">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Projects</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {projects.map((project) => (
-            <Link key={project.id} to={`/detail/${project.id}`} className="bg-white rounded-lg shadow-md p-4 transform transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
-              {/* 이미지 */}
-              <img
-                src={project.imageUrl}
-                alt={project.title}
-                className="w-full h-40 object-cover rounded-lg mb-4"
-              />
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">{project.title}</h3>
-              <p className="text-gray-500">{project.description}</p>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {/* Projects 컴포넌트 추가 */}
+      <ProjectList />
 
       {/* About Me */}
       <section id="about" className="mt-12 max-w-4xl w-full">

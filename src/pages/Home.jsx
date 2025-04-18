@@ -8,7 +8,7 @@ function ProjectList() {
     const res = await fetch('http://localhost:8000/projects');
     const data = await res.json();
     console.log(data);
-    setProjects(data);
+    setProjects(data.projects);
   };
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function ProjectList() {
               alt={project.name}
               className="w-full h-40 object-cover rounded-lg mb-4"
             />
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">{project.name}</h3>
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">{project.title}</h3>
             <p className="text-gray-500">{project.description}</p>
           </Link>
         ))}

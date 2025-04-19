@@ -26,35 +26,30 @@ const Detail = () => {
         <h2 className="text-xl font-semibold text-gray-700 mb-2 mt-2 pt-4">GitHub 주소</h2>
           <ul className='list-disc list-inside'>
             {detail.github?.map((github) => (
-              <button onClick={() => window.location.href=`https://github.com/hello/${github}`} className='bg-gray-500 hover:bg-gray-600 text-white m-1'>{github}</button>
+              <button onClick={() => window.location.href=`https://github.com/gongbu22/${github}`} className='bg-gray-500 hover:bg-gray-600 text-white m-1'>{github}</button>
             ))}
           </ul>
       </section>
 
       {/* 프로젝트 개요 */}
-      <section className="mb-mb-8 p-6 bg-white rounded-xl shadow-md border border-gray-200">
-        <h2 className="text-xl font-semibold text-gray-700 mb-2">프로젝트 개요</h2>
+      <section className="mb-mb-8">
+        <h2 className="text-xl font-semibold text-gray-700 mb-3">프로젝트 개요</h2>
           <ul className='list-disc pl-6 m-1'>
             {detail.overview?.map((overview) => (
-              <li className='m-1'>{overview}</li>
+              <li className='m-2'>{overview}</li>
             ))}
           </ul>
       </section>
 
       {/* 설계 이미지 */}
       <section className="mb-8 mt-6">
-        <h2 className="text-xl font-semibold text-gray-700 mb-2">설계 구조</h2>
+        <h2 className="text-xl font-semibold text-gray-700 mb-2 mt-5">설계 구조</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <img
-            src="/images/design-diagram1.png"
-            alt="설계 이미지 1"
-            className="w-full h-auto object-contain rounded shadow-md"
-          />
-          <img
-            src="/images/design-diagram2.png"
-            alt="설계 이미지 2"
-            className="w-full h-auto object-contain rounded shadow-md"
-          />
+          {detail.design?.map((design) => (
+              <img src={`/src/assets/${design}`}
+              alt={`${design}`}
+              className='m-1 p-1 aspect-[7/4] border border-gray-300'/>
+            ))}
         </div>
       </section>
 
@@ -92,16 +87,11 @@ const Detail = () => {
       <section>
         <h2 className="text-xl font-semibold text-gray-700 mb-2">웹사이트 미리보기</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <img
-            src="/images/project-preview1.png"
-            alt="웹사이트 이미지 1"
-            className="w-full h-auto object-contain rounded shadow-md"
-          />
-          <img
-            src="/images/project-preview2.png"
-            alt="웹사이트 이미지 2"
-            className="w-full h-auto object-contain rounded shadow-md"
-          />
+          {detail.web?.map((web) => (
+              <img src={`/src/assets/${web}`}
+              alt={`${web}`}
+              className='m-1 p-1 w-70 h-50 border border-gray-300'/>
+            ))}
         </div>
       </section>
     </div>

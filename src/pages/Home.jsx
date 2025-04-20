@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function ProjectList() {
@@ -7,7 +7,6 @@ function ProjectList() {
   const fetchProjects = async () => {
     const res = await fetch('http://localhost:8000/projects');
     const data = await res.json();
-    console.log(data);
     setProjects(data.projects);
   };
 
@@ -18,12 +17,16 @@ function ProjectList() {
   return (
     <section id="projects" className="mt-12 max-w-4xl w-full">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Projects</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {projects.map((project) => (
-          <Link key={project.id} to={`/detail/${project.id}`} className="bg-white rounded-lg shadow-md p-4 transform transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
+          <Link
+            key={project.id}
+            to={`/detail/${project.id}`}
+            className="bg-white rounded-lg shadow-md p-4 transform transition-transform hover:scale-105 hover:shadow-lg cursor-pointer"
+          >
             {/* 이미지 */}
             <img
-              src={project.imageUrl || "https://via.placeholder.com/150"} // 이미지 URL이 없으면 placeholder 사용
+              src={project.imageUrl || 'https://via.placeholder.com/150'}
               alt={project.name}
               className="w-full h-40 object-cover rounded-lg mb-4"
             />
@@ -37,38 +40,65 @@ function ProjectList() {
 }
 
 const Home = () => {
-  return (
-    <main className="min-h-screen bg-gray-100 flex flex-col items-center pt-24 px-6 md:px-0">
+  const [chatbotOpen, setChatbotOpen] = useState(false); 
 
-      {/* Main */}
-      <section className="mb-12 text-center max-w-4xl w-full">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Yujin's Portfolio</h1>
-        <p className="text-lg text-gray-600 mb-6">책임감있고 성실한 웹개발자 박유진입니다.</p>
-        <div className="flex justify-center space-x-4">
-          <a href="#projects" className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-            Projects
-          </a>
-          <a href="#about" className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
-            About me
-          </a>
+  // 챗봇 열기/닫기
+  const toggleChatbot = () => setChatbotOpen(!chatbotOpen);
+
+  return (
+    <main className="h-screen bg-yellow-400 flex md:px-0">
+      {/* 왼쪽 프로필 + 오른쪽 챗봇 */}
+      <section className="flex w-full max-w-screen-xl relative">
+        {/* 왼쪽 프로필 */}
+        <div className="w-1/4 bg-yellow-100 p-6 rounded-lg shadow-md z-20">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4 mt-10">Yujin's Portfolio</h1>
+          <p className="text-lg text-gray-600 mb-6">
+            책임감있고 성실한 웹개발자 박유진입니다.
+          </p>
+          <div className="flex justify-center space-x-4">
+            <button
+              onClick={toggleChatbot} // 버튼 클릭 시 챗봇 열기
+              className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+            >
+              About Me
+            </button>
+          </div>
+        </div>
+
+        {/* 오른쪽 챗봇 창 */}
+        <div className="z-10">
+          <div
+            className={`${
+              chatbotOpen ? 'translate-x-0' : 'translate-x-full'
+            } transition-transform duration-1000 ease-out absolute left-0 top-0 w-1/4 h-full bg-white shadow-xl p-4 rounded-l-lg flex flex-col`}
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">About Me</h3>
+              <button onClick={toggleChatbot} className="text-gray-500 text-xl">X</button>
+            </div>
+            <div className="flex-1 overflow-auto">
+              <div className="flex flex-col space-y-2">
+                <div className="bg-gray-100 p-3 rounded-lg self-start max-w-[70%]">
+                  <p className="text-gray-800">안녕하세요! 저에 대해 궁금한 점이 무엇인가요?</p>
+                </div>
+                <div className="bg-blue-100 p-3 rounded-lg self-end max-w-[70%]">
+                  <p className="text-gray-800">답변~</p>
+                </div>
+              </div>
+            </div>
+            <input
+              type="text"
+              placeholder="메시지를 입력하세요..."
+              className="p-3 border-t border-gray-300 rounded-b-lg w-full"
+            />
+          </div>
+        </div>
+
+        {/* 오른쪽 프로젝트 */}
+        <div className="w-3/4 pl-6">
+          <ProjectList />
         </div>
       </section>
-
-      {/* Projects 컴포넌트 추가 */}
-      <ProjectList />
-
-      {/* About Me */}
-      <section id="about" className="mt-12 max-w-4xl w-full">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">About Me</h2>
-        <p className="text-lg text-gray-600">
-          안녕하세요! 저는 백엔드 개발자를 꿈꾸는 신입 개발자 박유진입니다. <br />
-          팀 프로젝트와 개인 프로젝트를 통해 실무에 가까운 구조를 구현하고, MSA 구조와 CI/CD 자동화에 흥미를 느껴 학습하고 있습니다.
-          <br /><br />
-          비전공자로 시작했지만, 탄탄한 백엔드 로직 구현과 안정적인 배포를 목표로 매일 성장 중입니다. 새로운 기술을 배우는 데 두려움이 없고,
-          문제 해결에 대한 집요함이 제 강점입니다.
-        </p>
-      </section>
-
     </main>
   );
 };

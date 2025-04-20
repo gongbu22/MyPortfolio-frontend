@@ -13,7 +13,7 @@ const Navbar = () => {
       </Link>
 
     
-      <nav className="flex space-x-6 ml-auto flex-wrap">
+      {/* <nav className="flex space-x-6 ml-auto flex-wrap">
         {isHome && (
           <>
             <a href="#about" className="text-gray-700 hover:text-blue-500">About Me</a>
@@ -21,7 +21,7 @@ const Navbar = () => {
             <a href="#contact" className="text-gray-700 hover:text-blue-500">Contact</a>
           </>
         )}
-      </nav>
+      </nav> */}
     </header>
   );
 };

@@ -15,27 +15,30 @@ function ProjectList() {
   }, []);
 
   return (
-    <section id="projects" className="mt-12 max-w-4xl w-full">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Projects</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-        {projects.map((project) => (
-          <Link
-            key={project.id}
-            to={`/detail/${project.id}`}
-            className="bg-white rounded-lg shadow-md p-4 transform transition-transform hover:scale-105 hover:shadow-lg cursor-pointer"
-          >
-            {/* 이미지 */}
-            <img
-              src={project.imageUrl || 'https://via.placeholder.com/150'}
-              alt={project.name}
-              className="w-full h-40 object-cover rounded-lg mb-4"
-            />
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">{project.title}</h3>
-            <p className="text-gray-500">{project.description}</p>
-          </Link>
-        ))}
-      </div>
-    </section>
+    <section
+  id="projects"
+  className="mt-5 min-h-screen flex flex-col items-center justify-center px-4"
+>
+  {/* <h2 className="text-2xl font-bold text-gray-800 mb-10 text-center">Projects</h2> */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-4xl w-full justify-items-center">
+    {projects.map((project) => (
+      <Link
+        key={project.id}
+        to={`/detail/${project.id}`}
+        className="bg-white rounded-lg border border-gray-100 shadow-xl p-4 transform transition-transform hover:scale-105 hover:shadow-2xl cursor-pointer w-full max-w-sm min-h-[300px] -translate-y-1"
+      >
+        <img
+          src={`/src/assets/${project.web[0]}`}
+          alt={project.name}
+          className="w-full h-[200px] object-cover rounded-lg mb-4"
+        />
+        <h3 className="text-xl font-semibold text-gray-700 mb-2">{project.title}</h3>
+        {/* <p className="text-gray-500">{project.description}</p> */}
+      </Link>
+    ))}
+  </div>
+</section>
+
   );
 }
 
@@ -48,9 +51,9 @@ const Home = () => {
   return (
     <main className="h-screen bg-yellow-400 flex md:px-0">
       {/* 왼쪽 프로필 + 오른쪽 챗봇 */}
-      <section className="flex w-full max-w-screen-xl relative">
+      <section className="flex w-full relative">
         {/* 왼쪽 프로필 */}
-        <div className="w-1/4 bg-yellow-100 p-6 rounded-lg shadow-md z-20">
+        <div className="w-[320px] bg-yellow-100 p-6 rounded-lg shadow-md z-20">
           <h1 className="text-4xl font-bold text-gray-800 mb-4 mt-10">Yujin's Portfolio</h1>
           <p className="text-lg text-gray-600 mb-6">
             책임감있고 성실한 웹개발자 박유진입니다.
@@ -70,11 +73,11 @@ const Home = () => {
           <div
             className={`${
               chatbotOpen ? 'translate-x-0' : 'translate-x-full'
-            } transition-transform duration-1000 ease-out absolute left-0 top-0 w-1/4 h-full bg-white shadow-xl p-4 rounded-l-lg flex flex-col`}
+            } transition-transform duration-1000 ease-out absolute left-0 top-0 w-[320px] h-full bg-white/90 shadow-xl p-4 rounded-l-lg flex flex-col`}
           >
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-semibold text-gray-800">About Me</h3>
-              <button onClick={toggleChatbot} className="text-gray-500 text-xl">X</button>
+              <button onClick={toggleChatbot} className="text-gray-500 text-m mr-5">X</button>
             </div>
             <div className="flex-1 overflow-auto">
               <div className="flex flex-col space-y-2">
@@ -95,7 +98,7 @@ const Home = () => {
         </div>
 
         {/* 오른쪽 프로젝트 */}
-        <div className="w-3/4 pl-6">
+        <div className="w-3/4 pl-10">
           <ProjectList />
         </div>
       </section>

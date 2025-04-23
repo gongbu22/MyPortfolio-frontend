@@ -79,7 +79,7 @@ const Detail = () => {
         <ul className="list-disc list-inside">
           {detail.github?.map((github) => (
             <button
-              onClick={() => window.location.href = `https://github.com/hello/${github}`}
+              onClick={() => window.location.href = `https://github.com/gongbu22/${github}`}
               className="bg-gray-500 hover:bg-gray-600 text-white m-1"
             >
               {github}

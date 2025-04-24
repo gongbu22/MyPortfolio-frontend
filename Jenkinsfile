@@ -10,16 +10,16 @@ pipeline {
         // COMMIT_MESSAGE = 'Update README.md via Jenkins Pipeline'
     }
 
-    stage {
-        stage('clone from SCM') {
-            steps {
-                sh '''
-                rm -rf MyPortfolio-frontend
-                git clone https://github.com/gongbu22/MyPortfolio-frontend.git
-                '''
-            }
+    
+    stage('clone from SCM') {
+        steps {
+            sh '''
+            rm -rf MyPortfolio-frontend
+            git clone https://github.com/gongbu22/MyPortfolio-frontend.git
+            '''
         }
     }
+    
 
     stage('Docker Image Building') {
         steps {

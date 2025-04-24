@@ -10,7 +10,7 @@ pipeline {
         // COMMIT_MESSAGE = 'Update README.md via Jenkins Pipeline'
     }
 
-    stage {
+    stages {
         stage('clone from SCM') {
             steps {
                 sh '''

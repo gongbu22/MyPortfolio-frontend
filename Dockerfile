@@ -12,8 +12,8 @@ RUN npm run build
 # nginx
 FROM nginx:alpine
 
-COPY --from=builder /app/dist /usr/share/nignx/html
-COPY ./src/assets /usr/share/nginx/html/assets
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY ./src/assets /usr/share/nginx/html/src/assets
 
 
 EXPOSE 80

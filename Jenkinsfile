@@ -41,7 +41,7 @@ pipeline {
         stage('Docker Image pushing') {
                 steps {
                     sh '''
-                    docker push ${DOCKER_IMAGE_OWNER}/MyPortfolio-frontend:latest
+                    docker push ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:latest
                     '''
                 }
             }

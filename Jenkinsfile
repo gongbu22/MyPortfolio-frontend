@@ -39,12 +39,12 @@ pipeline {
         }
 
         stage('Docker Image pushing') {
-                steps {
-                    sh '''
-                    docker push ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:latest
-                    '''
-                }
+            steps {
+                sh '''
+                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:latest
+                '''
             }
+        }
 
         stage('Docker Logout') {
             steps {

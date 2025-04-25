@@ -25,8 +25,7 @@ pipeline {
             steps {
                 dir('MyPortfolio-frontend') {
                     sh '''
-                    docker compose build t ${DOCKER_IMAGE_OWNER}/MyPortfolio-frontend:latest .
-                    docker tag ${DOCKER_IMAGE_OWNER}/MyPortfolio-frontend:latest ${DOCKER_IMAGE_OWNER}/MyPortfolio-frontend:${DOCKER_IMAGE_TAG}
+                    docker build t ${DOCKER_IMAGE_OWNER}/MyPortfolio-frontend:latest .
                     '''
                 }
             }

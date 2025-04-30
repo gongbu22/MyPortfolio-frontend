@@ -13,10 +13,10 @@ pipeline {
     stages {
         stage('clone from SCM') {
             steps {
-                sh '''
+                sh """
                 rm -rf MyPortfolio-frontend
                 git clone https://github.com/gongbu22/MyPortfolio-frontend.git
-                '''
+                """
             }
         }
     
@@ -24,9 +24,9 @@ pipeline {
         stage('Docker Image Building') {
             steps {
                 dir('MyPortfolio-frontend') {
-                    sh '''
+                    sh """
                     docker build -t ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:latest -t ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:${DOCKER_BUILD_TAG} .
-                    '''
+                    """
                 }
             }
         }
@@ -40,27 +40,27 @@ pipeline {
 
         stage('Docker Image pushing') {
             steps {
-                sh '''
+                sh """
                 docker push ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:${DOCKER_BUILD_TAG}
                 docker push ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:latest
-                '''
+                """
             }
         }
 
         stage('Docker Logout') {
             steps {
-                sh '''
+                sh """
                 docker logout
-                '''
+                """
             }
         }
 
         stage('Clone Repository') {
             steps {
-                sh '''
+                sh """
                 rm -rf MyPortfolio-CD
                 git clone https://github.com/${REPO_URL}
-                '''
+                """
             }
         }
 
@@ -86,12 +86,12 @@ pipeline {
         stage('Commit Changes') {
             steps {
                 dir('MyPortfolio-CD') {
-                sh '''
+                sh """
                     git config user.name "gongbu22"
                     git config user.email "pyujin0711@naver.com"
                     git add README.md MyPortfolio-CD/values.yaml
                     git commit -m "${COMMIT_MESSAGE}"
-                '''
+                """
                 }
             }
         }
@@ -99,9 +99,9 @@ pipeline {
         stage('Push Changes') {
             steps {
                 dir('MyPortfolio-CD') {
-                sh '''
+                sh """
                     git push https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@github.com/${REPO_URL} main
-                '''
+                """
                 }
             }
         }

@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE_OWNER = 'dangdang42'
         DOCKER_BUILD_TAG = "v${env.BUILD_NUMBER}"
         DOCKER_PWD = credentials('dockerhub')
-        GIT_CREDENTIALS = credentials('github_access_token')
+        // GIT_CREDENTIALS = credentials('github_access_token')
         REPO_URL = 'gongbu22/MyPortfolio-CD.git'
         COMMIT_MESSAGE = 'Update README.md via Jenkins Pipeline'
     }
@@ -55,56 +55,56 @@ pipeline {
             }
         }
 
-        stage('Clone Repository') {
-            steps {
-                sh """
-                rm -rf MyPortfolio-CD
-                git clone https://github.com/${REPO_URL}
-                """
-            }
-        }
+        // stage('Clone Repository') {
+        //     steps {
+        //         sh """
+        //         rm -rf MyPortfolio-CD
+        //         git clone https://github.com/${REPO_URL}
+        //         """
+        //     }
+        // }
 
-        stage('Modify README.md') {
-            steps {
-                sh """
-                    cd MyPortfolio-CD
-                    echo "# Updated README" > README.md
-                    echo "This README was updated by Jenkins Build #${DOCKER_BUILD_TAG} on \$(date)" >> README.md
-                """
-            }
-        }
+        // stage('Modify README.md') {
+        //     steps {
+        //         sh """
+        //             cd MyPortfolio-CD
+        //             echo "# Updated README" > README.md
+        //             echo "This README was updated by Jenkins Build #${DOCKER_BUILD_TAG} on \$(date)" >> README.md
+        //         """
+        //     }
+        // }
 
-        stage('Update values.yaml') {
-            steps {
-                sh """
-                   cd MyPortfolio-CD
-                   sed -i 's|FRONTEND_IMG: .*|FRONTEND_IMG: ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:${DOCKER_BUILD_TAG}|' values.yaml
-                """
-            }
-        }
+        // stage('Update values.yaml') {
+        //     steps {
+        //         sh """
+        //            cd MyPortfolio-CD
+        //            sed -i 's|FRONTEND_IMG: .*|FRONTEND_IMG: ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:${DOCKER_BUILD_TAG}|' values.yaml
+        //         """
+        //     }
+        // }
 
-        stage('Commit Changes') {
-            steps {
-                dir('MyPortfolio-CD') {
-                sh """
-                    git config user.name "gongbu22"
-                    git config user.email "pyujin0711@naver.com"
-                    git add README.md MyPortfolio-CD/values.yaml
-                    git commit -m "${COMMIT_MESSAGE}"
-                """
-                }
-            }
-        }
+        // stage('Commit Changes') {
+        //     steps {
+        //         dir('MyPortfolio-CD') {
+        //         sh """
+        //             git config user.name "gongbu22"
+        //             git config user.email "pyujin0711@naver.com"
+        //             git add README.md MyPortfolio-CD/values.yaml
+        //             git commit -m "${COMMIT_MESSAGE}"
+        //         """
+        //         }
+        //     }
+        // }
 
-        stage('Push Changes') {
-            steps {
-                dir('MyPortfolio-CD') {
-                sh """
-                    git push https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@github.com/${REPO_URL} main
-                """
-                }
-            }
-        }
+        // stage('Push Changes') {
+        //     steps {
+        //         dir('MyPortfolio-CD') {
+        //         sh """
+        //             git push https://${GIT_CREDENTIALS_USR}:${GIT_CREDENTIALS_PSW}@github.com/${REPO_URL} main
+        //         """
+        //         }
+        //     }
+        // }
     }
     
 }

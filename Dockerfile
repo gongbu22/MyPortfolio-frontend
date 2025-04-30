@@ -13,7 +13,7 @@ RUN npm run build
 FROM nginx:alpine
 
 COPY --from=builder /app/dist /usr/share/nginx/html
-COPY ./src/assets /usr/share/nginx/html/src/assets
+# COPY ./src/assets /usr/share/nginx/html/src/assets
 
 
 EXPOSE 80

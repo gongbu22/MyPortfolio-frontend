@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// const fastapiUrl = process.env.REACT_APP_FASTAPI_URL;
+const fastapiUrl = process.env.REACT_APP_FASTAPI_URL || "127.0.0.1";
 
 function ProjectList() {
   const [projects, setProjects] = useState([]);
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch(`http://fastapi-service:8000/projects`);
+      const res = await fetch(`http://${fastapiUrl}/projects`);
       const data = await res.json();
       setProjects(data.projects);
     } catch (error) {

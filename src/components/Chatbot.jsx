@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-// const chatUrl = process.env.REACT_APP_CHATBOT_URL;
+const chatUrl = process.env.REACT_APP_CHATBOT_URL || "127.0.0.1";
 
 function Chatbot({ chatbotOpen, toggleChatbot }) {
   const [messages, setMessages] = useState([
@@ -13,7 +13,7 @@ function Chatbot({ chatbotOpen, toggleChatbot }) {
   const sendMessage = async (question) => {
     setMessages((prev) => [...prev, { from: 'user', text: question }]);
 
-    const res = await fetch(`http://chatbot-service:8001/chatbot`, {
+    const res = await fetch(`http://${chatUrl}/chatbot`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question })

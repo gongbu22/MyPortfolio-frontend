@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-// const fastapiUrl = process.env.REACT_APP_FASTAPI_URL;
+const fastapiUrl = process.env.REACT_APP_FASTAPI_URL || "127.0.0.1";
 
 const Detail = () => {
   const { id } = useParams();
   const [detail, setDetail] = useState([]);
 
   const fetchDetails = async () => {
-    const res = await fetch(`http://fastapi-service:8000/detail/${id}`);
+    const res = await fetch(`http://${fastapiUrl}/detail/${id}`);
     const data = await res.json();
     setDetail(data);
   };

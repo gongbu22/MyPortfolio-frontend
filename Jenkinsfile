@@ -22,22 +22,26 @@ pipeline {
             }
         }
 
-        stage('Create .env File') {
-            steps {
-                dir('MyPortfolio-frontend') {
-                    sh """
-                    echo 'REACT_APP_FASTAPI_URL=fastapi-service:30800' > .env
-                    echo 'REACT_APP_CHATBOT_URL=chatbot-service:30801' >> .env
-                    """
-                }
-            }
-        }    
+        // stage('Create .env File') {
+        //     steps {
+        //         dir('MyPortfolio-frontend') {
+        //             sh """
+        //             echo 'REACT_APP_FASTAPI_URL=fastapi-service:30800' > .env
+        //             echo 'REACT_APP_CHATBOT_URL=chatbot-service:30801' >> .env
+        //             """
+        //         }
+        //     }
+        // }    
 
         stage('Docker Image Building') {
             steps {
                 dir('MyPortfolio-frontend') {
                     sh """
-                    docker build -t ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:latest -t ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:${DOCKER_BUILD_TAG} .
+                    docker build \
+                    --build-arg REACT_APP_FASTAPI_URL=fastapi-service:30800 \
+                    --build-arg REACT_APP_CHATBOT_URL=chatbot-service:30801 \
+                    -t ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:latest \
+                    -t ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:${DOCKER_BUILD_TAG} .
                     """
                 }
             }

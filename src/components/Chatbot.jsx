@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-const chatUrl = process.env.REACT_APP_CHATBOT_URL;
+// const chatUrl = process.env.REACT_APP_CHATBOT_URL;
 
 function Chatbot({ chatbotOpen, toggleChatbot }) {
   const [messages, setMessages] = useState([

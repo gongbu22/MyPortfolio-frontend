@@ -22,16 +22,16 @@ pipeline {
             }
         }
 
-        // stage('Create .env File') {
-        //     steps {
-        //         dir('MyPortfolio-frontend') {
-        //             sh """
-        //             echo 'REACT_APP_FASTAPI_URL=${REACT_APP_FASTAPI_URL}' > .env
-        //             echo 'REACT_APP_CHATBOT_URL=${REACT_APP_CHATBOT_URL}' >> .env
-        //             """
-        //         }
-        //     }
-        // }    
+        stage('Create .env File') {
+            steps {
+                dir('MyPortfolio-frontend') {
+                    sh """
+                    echo 'REACT_APP_FASTAPI_URL=fastapi-service:30800' > .env
+                    echo 'REACT_APP_CHATBOT_URL=chatbot-service:30801' >> .env
+                    """
+                }
+            }
+        }    
 
         stage('Docker Image Building') {
             steps {

@@ -13,7 +13,7 @@ function Chatbot({ chatbotOpen, toggleChatbot }) {
   const sendMessage = async (question) => {
     setMessages((prev) => [...prev, { from: 'user', text: question }]);
 
-    const res = await fetch(`http://${chatUrl}/chatbot`, {
+    const res = await fetch(`http://chatbot-service:8001/chatbot`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question })

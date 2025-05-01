@@ -8,7 +8,7 @@ const Detail = () => {
   const [detail, setDetail] = useState([]);
 
   const fetchDetails = async () => {
-    const res = await fetch(`http://${fastapiUrl}/detail/${id}`);
+    const res = await fetch(`http://fastapi-service:8000/detail/${id}`);
     const data = await res.json();
     setDetail(data);
   };

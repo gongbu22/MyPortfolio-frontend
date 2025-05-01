@@ -7,7 +7,7 @@ function ProjectList() {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch(`http://${fastapiUrl}/projects`);
+      const res = await fetch(`http://fastapi-service:8000/projects`);
       const data = await res.json();
       setProjects(data.projects);
     } catch (error) {

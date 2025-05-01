@@ -26,8 +26,8 @@ pipeline {
             steps {
                 dir('MyPortfolio-frontend') {
                     sh """
-                    echo 'FASTAPI_URL=${REACT_APP_FASTAPI_URL}' > .env
-                    echo 'CHATBOT_URL=${REACT_APP_CHATBOT_URL}' >> .env
+                    echo 'REACT_APP_FASTAPI_URL=${REACT_APP_FASTAPI_URL}' > .env
+                    echo 'REACT_APP_CHATBOT_URL=${REACT_APP_CHATBOT_URL}' >> .env
                     """
                 }
             }

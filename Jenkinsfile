@@ -8,6 +8,8 @@ pipeline {
         // GIT_CREDENTIALS = credentials('github_access_token')
         REPO_URL = 'gongbu22/MyPortfolio-CD.git'
         COMMIT_MESSAGE = 'Update README.md via Jenkins Pipeline'
+        FASTAPI_URL = credentials('fastapi-url')
+        CHATBOT_URL = credentials('chatbot-url')
     }
 
     stages {
@@ -19,7 +21,17 @@ pipeline {
                 """
             }
         }
-    
+
+        stage('Create .env File') {
+            steps {
+                dir('MyPortfolio-frontend') {
+                    sh """
+                    echo 'FASTAPI_URL=${FASTAPI_URL}' > .env
+                    echo 'CHATBOT_URL=${CHATBOT_URL}' >> .env
+                    """
+                }
+            }
+        }    
 
         stage('Docker Image Building') {
             steps {

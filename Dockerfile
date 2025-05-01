@@ -2,6 +2,12 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 
+ARG FASTAPI_URL
+ARG CHATBOT_URL
+
+RUN echo "FASTAPI_URL=$FASTAPI_URL" > .env
+RUN echo "CHATBOT_URL=$CHATBOT_URL" >> .env
+
 COPY package*.json ./
 RUN npm install
 

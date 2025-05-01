@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-const fastapiUrl = process.env.FASTAPI_URL;
+const fastapiUrl = process.env.REACT_APP_FASTAPI_URL;
 
 const Detail = () => {
   const { id } = useParams();

@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-const fastapiUrl = process.env.REACT_APP_FASTAPI_URL || "127.0.0.1";
+const VITE_FASTAPI_URL = import.meta.env.VITE_FASTAPI_URL || "http://localhost:8000";
 
 const Detail = () => {
-  const { id } = useParams();
+  const { num } = useParams();
   const [detail, setDetail] = useState([]);
 
+  console.log("num: "+num)
+
   const fetchDetails = async () => {
-    const res = await fetch(`http://${fastapiUrl}/detail/${id}`);
+    const res = await fetch(`${VITE_FASTAPI_URL}/detail/${num}`);
     const data = await res.json();
     setDetail(data);
   };
 
   useEffect(() => {
     fetchDetails();
-  }, [id]);
+  }, [num]);
 
   // 슬라이더 설정
   const settings = {

@@ -16,7 +16,7 @@ function App() {
         <div className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/detail/:num" element={<Detail />} />
         </Routes>
       </div>
       <Footer />

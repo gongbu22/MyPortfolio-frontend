@@ -21,7 +21,7 @@ function ProjectList() {
 
   return (
     <section
-      className="mt-5 min-h-screen flex flex-col items-center justify-center px-4"
+      className="min-h-screen flex flex-col items-center justify-center px-4"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-4xl w-full justify-items-center">
         {projects.map((project) => (

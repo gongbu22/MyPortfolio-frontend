@@ -3,12 +3,12 @@ const VITE_CHATBOT_URL = import.meta.env.VITE_CHATBOT_URL || "http://127.0.0.1:8
 
 function Chatbot({ chatbotOpen, toggleChatbot }) {
   const [messages, setMessages] = useState([
-    { from: 'bot', text: `저에 대해 궁금한 것이 무엇인가요?` }
+    { from: 'bot', text: `궁금한 것에 대해 간단히 답해드립니다!` }
   ]);
   const [input, setInput] = useState('');
   const chatEndRef = useRef(null);
 
-  const suggestions = ['성격', '가치관', '수상경력'];
+  const suggestions = ['지원동기', '가치관', '기술스택', '수상경력', '경험', '관심사' ];
 
   const sendMessage = async (question) => {
     setMessages((prev) => [...prev, { from: 'user', text: question }]);
@@ -37,8 +37,9 @@ function Chatbot({ chatbotOpen, toggleChatbot }) {
 
   useEffect(() => {
     // chatEndRef.current.scrollIntoView()를 호출하여 최신 메시지로 스크롤
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+      chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]
+  );
 
   return (
     <div className="z-10">
@@ -49,7 +50,7 @@ function Chatbot({ chatbotOpen, toggleChatbot }) {
       >
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold text-gray-800">About Me</h3>
-          <button onClick={toggleChatbot} className="text-gray-500 text-m mr-5">X</button>
+          <button onClick={toggleChatbot} className="text-gray-500 text-m mr-5 border-2 border-gray-300">X</button>
         </div>
 
         {/* 추천 질문 버튼 영역 */}
@@ -58,7 +59,7 @@ function Chatbot({ chatbotOpen, toggleChatbot }) {
             <button
               key={idx}
               onClick={() => handleSuggestionClick(item)}
-              className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm hover:bg-gray-300 transition"
+              className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm hover:bg-blue-600 transition"
             >
               {item}
             </button>
@@ -78,6 +79,7 @@ function Chatbot({ chatbotOpen, toggleChatbot }) {
                 <p className="text-gray-800">{msg.text}</p>
               </div>
             ))}
+            <div ref={chatEndRef} />
           </div>
         </div>
 
@@ -85,7 +87,7 @@ function Chatbot({ chatbotOpen, toggleChatbot }) {
         {/* 입력창 */}
         <input
           type="text"
-          placeholder="메시지 작성 후 Enter를 눌러주세요."
+          placeholder="질문 작성 후 Enter를 눌러주세요."
           className="p-3 border-t border-gray-700 rounded-b-lg w-full"
           value={input}
           onChange={(e) => setInput(e.target.value)}

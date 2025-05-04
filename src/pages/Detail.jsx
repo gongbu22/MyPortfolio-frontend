@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 const VITE_FASTAPI_URL = import.meta.env.VITE_FASTAPI_URL || "http://localhost:8000";
 
 const Detail = () => {
   const { num } = useParams();
+  const navigate = useNavigate(); 
   const [detail, setDetail] = useState([]);
 
-  console.log("num: "+num)
+  // console.log("num: "+num)
 
   const fetchDetails = async () => {
     const res = await fetch(`${VITE_FASTAPI_URL}/detail/${num}`);
@@ -31,14 +32,22 @@ const Detail = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-20 p-4 text-left">
+    <div className="max-w-4xl mx-auto p-4 text-left">
+      
+      <button
+        onClick={() => navigate('/')}
+        className="mb-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition"
+      >
+        ← 이전
+      </button>
+      
       <h1 className="text-4xl font-bold text-gray-900 mb-4 border-b-2 border-gray-500 pb-6 text-center">
-        "{detail.title}" 상세 정보
+        " {detail.title} " 상세 정보
       </h1>
 
       {/* 웹사이트 이미지 */}
       <section>
-        <h2 className="text-xl font-semibold text-gray-700 mb-2">웹사이트 미리보기</h2>
+        <h2 className="text-xl font-semibold text-gray-700 mb-2">웹사이트</h2>
         <div className="text-xl font-semibold text-gray-700 mb-2 mt-5">
           <div className="w-full">
             {/* 슬라이더 적용 */}
@@ -48,7 +57,7 @@ const Detail = () => {
                   <img
                     src={`/src/assets/${web}`}
                     alt={`Design ${index}`}
-                    className="w-full h-[400px] object-contain mx-auto"
+                    className="w-full h-[400px] object-contain"
                   />
                 </div>
               ))}

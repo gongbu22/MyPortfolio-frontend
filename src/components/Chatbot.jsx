@@ -3,7 +3,7 @@ const VITE_CHATBOT_URL = import.meta.env.VITE_CHATBOT_URL || "http://127.0.0.1:8
 
 function Chatbot({ chatbotOpen, toggleChatbot }) {
   const [messages, setMessages] = useState([
-    { from: 'bot', text: `궁금한 것에 대해 간단히 답해드립니다!` }
+    { from: 'bot', text: ` ⬆️ 궁금한 것을 클릭해주세요! 한 문장으로 간단히 답해드립니다.` }
   ]);
   const [input, setInput] = useState('');
   const chatEndRef = useRef(null);

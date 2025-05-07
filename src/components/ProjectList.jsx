@@ -8,6 +8,7 @@ function ProjectList() {
   const fetchProjects = async () => {
     try {
       const res = await fetch(`${VITE_FASTAPI_URL}/projects`);
+      console.log(`VITE_FASTAPI_URL: ${VITE_FASTAPI_URL}`);
       const data = await res.json();
       setProjects(data.projects);
     } catch (error) {

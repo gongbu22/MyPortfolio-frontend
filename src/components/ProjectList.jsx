@@ -31,7 +31,7 @@ function ProjectList() {
             className="bg-white rounded-lg border border-gray-100 shadow-xl p-4 transform transition-transform hover:scale-105 hover:shadow-2xl cursor-pointer w-full max-w-sm min-h-[300px] -translate-y-1"
           >
             <img
-              src={`/src/assets/${project.web[0]}`}
+              src={`/public/imgs/${project.web[0]}`}
               alt={project.name}
               className="w-full h-[200px] object-cover rounded-lg mb-4"
             />

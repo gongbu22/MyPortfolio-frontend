@@ -55,7 +55,7 @@ const Detail = () => {
               {detail.web?.map((web, index) => (
                 <div key={index}>
                   <img
-                    src={`/src/assets/${web}`}
+                    src={`/public/imgs/${web}`}
                     alt={`Design ${index}`}
                     className="w-full h-[400px] object-contain"
                   />
@@ -75,7 +75,7 @@ const Detail = () => {
             {detail.design?.map((design, index) => (
               <div key={index}>
                 <img
-                  src={`/src/assets/${design}`}
+                  src={`/public/imgs/${design}`}
                   alt={`Design ${index}`}
                   className="w-full h-[400px] object-contain mx-auto"
                 />

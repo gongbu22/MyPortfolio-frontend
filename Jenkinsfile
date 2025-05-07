@@ -38,10 +38,13 @@ pipeline {
                 dir('MyPortfolio-frontend') {
                     sh """
                     docker build \
-                    --build-arg REACT_APP_FASTAPI_URL=fastapi-service:30800 \
-                    --build-arg REACT_APP_CHATBOT_URL=chatbot-service:30801 \
-                    -t ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:latest \
-                    -t ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:${DOCKER_BUILD_TAG} .
+                    -t ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:latest \
+                    -t ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:${DOCKER_BUILD_TAG} \
+                    -f .nginx-Dockerfile . \
+                    docker build \
+                    -t ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:latest \
+                    -t ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:${DOCKER_BUILD_TAG} \
+                    -f .nodejs-Dockerfile .
                     """
                 }
             }
@@ -57,8 +60,10 @@ pipeline {
         stage('Docker Image pushing') {
             steps {
                 sh """
-                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:${DOCKER_BUILD_TAG}
-                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-frontend:latest
+                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:${DOCKER_BUILD_TAG}
+                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:latest
+                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:${DOCKER_BUILD_TAG}
+                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:latest
                 """
             }
         }

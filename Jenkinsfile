@@ -8,30 +8,34 @@ pipeline {
         // GIT_CREDENTIALS = credentials('github_access_token')
         REPO_URL = 'gongbu22/MyPortfolio-CD.git'
         COMMIT_MESSAGE = 'Update README.md via Jenkins Pipeline'
-        // REACT_APP_FASTAPI_URL = credentials('fastapi-url')
-        // REACT_APP_CHATBOT_URL = credentials('chatbot-url')
+        VITE_FASTAPI_URL = credentials('VITE_FASTAPI_URL')
+        VITE_CHATBOT_URL = credentials('VITE_CHATBOT_URL')
     }
 
     stages {
         stage('clone from SCM') {
             steps {
-                sh """
-                rm -rf MyPortfolio-frontend
-                git clone https://github.com/gongbu22/MyPortfolio-frontend.git
-                """
+                dir('MyPortfolio-frontend') {
+                    script {
+                        writeFile file: '.env', text: """
+                        VITE_FASTAPI_URL=${VITE_FASTAPI_URL}
+                        VITE_CHATBOT_URL=${VITE_CHATBOT_URL}
+                        """.stripIndent()
+                    }
+                }
             }
         }
 
-        // stage('Create .env File') {
-        //     steps {
-        //         dir('MyPortfolio-frontend') {
-        //             sh """
-        //             echo 'REACT_APP_FASTAPI_URL=fastapi-service:30800' > .env
-        //             echo 'REACT_APP_CHATBOT_URL=chatbot-service:30801' >> .env
-        //             """
-        //         }
-        //     }
-        // }    
+        stage('Create .env File') {
+            steps {
+                dir('MyPortfolio-frontend') {
+                    sh """
+                    echo 'REACT_APP_FASTAPI_URL=fastapi-service:30800' > .env
+                    echo 'REACT_APP_CHATBOT_URL=chatbot-service:30801' >> .env
+                    """
+                }
+            }
+        }    
 
         stage('Docker Image Building') {
             steps {

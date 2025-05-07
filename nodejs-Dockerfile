@@ -11,6 +11,7 @@ COPY tailwind.config.js /app/
 COPY vite.config.js /app/
 COPY postcss.config.cjs /app/
 
+COPY .env /app/.env
 
 COPY public/vite.svg /app/public/vite.svg
 COPY src/ /app/src/

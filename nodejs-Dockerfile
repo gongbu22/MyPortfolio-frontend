@@ -16,6 +16,8 @@ COPY public/vite.svg /app/public/vite.svg
 COPY src/ /app/src/
 COPY index.html /app/
 
+
+
 EXPOSE 5173
 
 CMD ["npm", "run", "dev"]

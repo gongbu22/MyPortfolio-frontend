@@ -5,10 +5,11 @@ FROM node:18-slim
 WORKDIR /app
 
 COPY package*.json /app/
+RUN npm install --no-optional
 COPY tailwind.config.js /app/
 COPY vite.config.js /app/
 COPY postcss.config.cjs /app/
-RUN npm install --no-optional
+
 
 COPY public/vite.svg /app/public/vite.svg
 COPY src/ /app/src/

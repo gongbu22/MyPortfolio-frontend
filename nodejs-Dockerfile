@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json /app/
 COPY tailwind.config.js /app/
 COPY vite.config.js /app/
-COPY postcss.config.js /app/
+COPY postcss.config.cjs /app/
 RUN npm install
 
 COPY public/vite.svg /app/public/vite.svg

@@ -41,8 +41,8 @@ pipeline {
             steps {
                 dir('MyPortfolio-frontend') {
                     sh """
-                    docker build --no-cache -t ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:latest --no-cache -t ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:${DOCKER_BUILD_TAG} -f nginx-Dockerfile . 
-                    docker build --no-cache -t ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:latest --no-cache -t ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:${DOCKER_BUILD_TAG} -f nodejs-Dockerfile .
+                    docker build --no-cache -t ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:latest --no-cache -t ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:${DOCKER_BUILD_TAG} -f ./Dockerfile-nginx . 
+                    docker build --no-cache -t ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:latest --no-cache -t ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:${DOCKER_BUILD_TAG} -f ./Dockerfile-nodejs .
                     """
                 }
             }

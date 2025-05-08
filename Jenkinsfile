@@ -15,6 +15,15 @@ pipeline {
     stages {
         stage('clone from SCM') {
             steps {
+                sh '''
+                rm -rf MyPortfolio-frontend
+                git clone https://github.com/gongbu22/MyPortfolio-frontend.git
+                '''
+            }
+        }
+
+        stage('Create .env File') {
+            steps {
                 dir('MyPortfolio-frontend') {
                     script {
                         writeFile file: '.env', text: """
@@ -36,16 +45,16 @@ pipeline {
         //         }
         //     }
         // }  
-        stage('Set Dockerfile Permissions') {
-            steps {
-                dir('MyPortfolio-frontend') {
-                    sh """
-                    chmod 644 nginx-Dockerfile
-                    chmod 644 nodejs-Dockerfile
-                    """
-                }
-            }
-        }  
+        // stage('Set Dockerfile Permissions') {
+        //     steps {
+        //         dir('MyPortfolio-frontend') {
+        //             sh """
+        //             chmod 644 ./nginx-Dockerfile
+        //             chmod 644 ./nodejs-Dockerfile
+        //             """
+        //         }
+        //     }
+        // }  
 
         stage('Docker Image Building') {
             steps {

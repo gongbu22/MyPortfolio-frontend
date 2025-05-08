@@ -26,16 +26,26 @@ pipeline {
             }
         }
 
-        stage('Create .env File') {
+        // stage('Create .env File') {
+        //     steps {
+        //         dir('MyPortfolio-frontend') {
+        //             sh """
+        //             echo 'REACT_APP_FASTAPI_URL=${VITE_FASTAPI_URL}' > .env
+        //             echo 'REACT_APP_CHATBOT_URL=${VITE_CHATBOT_URL}' >> .env
+        //             """
+        //         }
+        //     }
+        // }  
+        stage('Set Dockerfile Permissions') {
             steps {
                 dir('MyPortfolio-frontend') {
                     sh """
-                    echo 'REACT_APP_FASTAPI_URL=fastapi-service:30800' > .env
-                    echo 'REACT_APP_CHATBOT_URL=chatbot-service:30801' >> .env
+                    chmod 644 nginx-Dockerfile
+                    chmod 644 nodejs-Dockerfile
                     """
                 }
             }
-        }    
+        }  
 
         stage('Docker Image Building') {
             steps {

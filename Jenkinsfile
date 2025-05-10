@@ -60,8 +60,8 @@ pipeline {
             steps {
                 dir('MyPortfolio-frontend') {
                     sh """
-                    docker build -t ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:latest -t ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:${DOCKER_BUILD_TAG} -f nginx-Dockerfile . 
                     docker build -t ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:latest -t ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:${DOCKER_BUILD_TAG} -f nodejs-Dockerfile .
+                    docker build -t ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:latest -t ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:${DOCKER_BUILD_TAG} -f nginx-Dockerfile . 
                     """
                 }
             }
@@ -77,10 +77,10 @@ pipeline {
         stage('Docker Image pushing') {
             steps {
                 sh """
-                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:${DOCKER_BUILD_TAG}
-                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:latest
                 docker push ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:${DOCKER_BUILD_TAG}
                 docker push ${DOCKER_IMAGE_OWNER}/myportfolio-nodejs:latest
+                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:${DOCKER_BUILD_TAG}
+                docker push ${DOCKER_IMAGE_OWNER}/myportfolio-nginx:latest
                 """
             }
         }

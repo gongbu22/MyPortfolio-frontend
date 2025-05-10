@@ -1,50 +1,22 @@
-# FROM node:18-slim
+FROM node:18-slim
 
-
-
-# WORKDIR /app
-
-# COPY package*.json /app/
-# RUN rm -rf node_modules package-lock.json \
-#     && npm install
-# COPY tailwind.config.js /app/
-# COPY vite.config.js /app/
-# COPY postcss.config.cjs /app/
-
-# COPY .env /app/.env
-
-# COPY public/vite.svg /app/public/vite.svg
-# COPY src/ /app/src/
-# COPY index.html /app/
-
-
-
-# EXPOSE 5173
-
-# CMD ["npm", "run", "dev"]
-
-# Node.js 이미지를 기본으로 사용
-FROM node:18-slim AS node-builder
-
-# 작업 디렉토리 설정
 WORKDIR /app
 
-# 필수 파일들 복사
 COPY package*.json /app/
-RUN rm -rf node_modules package-lock.json && npm install
+RUN rm -rf node_modules package-lock.json \
+    && npm install
 COPY tailwind.config.js /app/
 COPY vite.config.js /app/
 COPY postcss.config.cjs /app/
+
 COPY .env /app/.env
+
 COPY public/vite.svg /app/public/vite.svg
 COPY src/ /app/src/
 COPY index.html /app/
 
-# 빌드 후 정적 파일을 빌드합니다.
-RUN npm run build
 
-# 포트 설정 (Node.js 앱 포트)
+
 EXPOSE 5173
 
-# Node.js 애플리케이션 실행
 CMD ["npm", "run", "dev"]

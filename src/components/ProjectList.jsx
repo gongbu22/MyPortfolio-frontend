@@ -21,7 +21,7 @@ function ProjectList() {
   }, []);
 
   return (
-    <section className="flex flex-col items-center px-4 pt-6 md:pt-10 bg-yellow-300 md:bg-white pb-24 md:pb-8">
+    <section className="flex flex-col items-center px-4 pt-6 md:pt-10 bg-yellow-300  pb-24 md:pb-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-4xl w-full justify-items-center">
         {projects.map((project) => (
           <Link

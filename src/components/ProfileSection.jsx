@@ -28,11 +28,12 @@ function ProfileSection({ toggleChatbot }) {
           About me
         </button>
         <span className="text-sm text-gray-500 mt-8">📩 pyujin42@gmail.com</span>
+        <br />
+        <div className="mt-50 text-center text-gray-700 text-sm md:hidden">
+          ⬇️ 아래로 스크롤해서 프로젝트를 확인해보세요!
+        </div>
       </div>
 
-      <div className="mt-20 text-center text-gray-700 text-sm md:hidden">
-        ⬇️ 아래로 스크롤해서 프로젝트를 확인해보세요!
-      </div>
 
     </div>
   );

@@ -21,15 +21,13 @@ function ProjectList() {
   }, []);
 
   return (
-    <section
-      className="min-h-screen flex flex-col items-center justify-center px-4"
-    >
+    <section className="flex flex-col items-center px-4 pt-6 md:pt-10 bg-yellow-300 md:bg-white pb-24 md:pb-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-4xl w-full justify-items-center">
         {projects.map((project) => (
           <Link
             key={project.num}
             to={`/detail/${project.num}`}
-            className="bg-white rounded-lg border border-gray-100 shadow-xl p-4 transform transition-transform hover:scale-105 hover:shadow-2xl cursor-pointer w-full max-w-sm min-h-[300px] -translate-y-1"
+            className="bg-white rounded-lg border border-gray-100 shadow-xl p-4 transform transition-transform hover:scale-105 hover:shadow-2xl cursor-pointer w-full max-w-sm min-h-[300px]"
           >
             <img
               src={`/public/imgs/${project.web[0]}`}
@@ -43,6 +41,7 @@ function ProjectList() {
         ))}
       </div>
     </section>
+
   );
 }
 

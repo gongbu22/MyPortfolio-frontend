@@ -41,7 +41,7 @@ function Chatbot({ chatbotOpen, toggleChatbot }) {
     <div
       className={`${
     chatbotOpen ? 'translate-x-0' : 'translate-x-full'
-  } transition-transform duration-700 ease-out fixed top-0 right-0 w-[320px] h-screen bg-white/90 shadow-xl p-4 flex flex-col z-50`}
+  } transition-transform duration-700 ease-out fixed top-0 right-0 w-[320px] md:w-[400px] h-screen bg-white/90 shadow-xl p-4 flex flex-col z-50`}
     >
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-semibold text-gray-800">About Me</h3>

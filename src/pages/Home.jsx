@@ -10,11 +10,11 @@ function Home() {
   return (
 
     <main className="h-screen flex flex-col md:flex-row relative">
-      <div className="w-full md:w-[320px] z-20">
+      <div className="w-full md:w-[400px] z-20">
         <ProfileSection toggleChatbot={toggleChatbot} />
       </div>
 
-      <div className="flex-1 z-10 bg-yellow-300">
+      <div className="flex-1 z-10 bg-yellow-300 pt-10">
         <ProjectList />
       </div>
 

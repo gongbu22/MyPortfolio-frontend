@@ -9,7 +9,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router basename="/app">
+    <Router>
       <div className="flex flex-col min-h-screen bg-yellow-300">
         {/* <Navbar /> */}
         {/* <Sidebar /> */}

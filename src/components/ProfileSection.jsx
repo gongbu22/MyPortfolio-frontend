@@ -44,9 +44,9 @@ function ProfileSection({ toggleChatbot }) {
         <br />
       </div>
 
-      <div className="mt-50 text-sm text-center text-gray-700 text-sm md:hidden">
+      {/* <div className="mt-50 text-sm text-center text-gray-700 text-sm md:hidden">
         ⬇️ 아래로 스크롤해서 프로젝트를 확인해보세요!
-      </div>
+      </div> */}
 
 
     </div>
